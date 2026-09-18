@@ -37,7 +37,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 
     
     
-threading.Thread(target=run_flask, daemon=True).start()
+threading.Thread(target=run_web, daemon=True).start()
 # ===== وەشەکان =====
 BAD_WORDS = ["قحبە", "حیز", "گەمژە", "سەگباب", "کونی", "کۆن", "خوێڕی"] # ئەمانە دەسڕێتەوە
 FIGHT_WORDS = ["شەڕ", "لیبدەن", "بیکوژن", "بجەن", "دەبێ شەڕ بکەین"]
