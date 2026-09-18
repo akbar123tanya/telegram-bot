@@ -13,7 +13,7 @@ def home(): return "SONY Alive"
 def run_flask():
     port = int(os.environ.get("PORT", 10000))
     app_flask.run(host='0.0.0.0', port=port)
-
+threading.Thread(target=run_flask, daemon=True).start()
 # ===== وەشەکان =====
 BAD_WORDS = ["قحبە", "حیز", "گەمژە", "سەگباب", "کونی", "کۆن", "خوێڕی"] # ئەمانە دەسڕێتەوە
 FIGHT_WORDS = ["شەڕ", "لیبدەن", "بیکوژن", "بجەن", "دەبێ شەڕ بکەین"]
