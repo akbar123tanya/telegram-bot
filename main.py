@@ -96,7 +96,7 @@ async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # 8- وەڵامی کۆتایی کە بانگی دەکەن
     await update.message.reply_text(f"گیان ئەمرکە {name} گیان 👂❤️")
 
-if name == "main":
+if __name__ == "__main__":
     threading.Thread(target=run_flask, daemon=True).start()
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
