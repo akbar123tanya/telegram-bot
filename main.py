@@ -1,18 +1,42 @@
 import os
-import random
 import threading
 from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "SONY Alive!"
+
+@app.route('/health')
+def health():
+    return "OK"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
+threading.Thread(target=run_web, daemon=True).start()
+
+import random
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-app_flask = Flask(__name__)
-@app_flask.route('/')
-def home(): return "SONY Alive"
-def run_flask():
-    port = int(os.environ.get("PORT", 10000))
-    app_flask.run(host='0.0.0.0', port=port)
+
+
+
+
+
+
+
+
+
+
+
+    
+    
 threading.Thread(target=run_flask, daemon=True).start()
 # ===== وەشەکان =====
 BAD_WORDS = ["قحبە", "حیز", "گەمژە", "سەگباب", "کونی", "کۆن", "خوێڕی"] # ئەمانە دەسڕێتەوە
