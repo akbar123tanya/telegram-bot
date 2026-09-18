@@ -121,7 +121,7 @@ async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"گیان ئەمرکە {name} گیان 👂❤️")
 
 if __name__ == "__main__":
-    threading.Thread(target=run_, daemon=True).start()
+    threading.Thread(target=run_web, daemon=True).start()
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
