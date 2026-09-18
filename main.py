@@ -7,7 +7,7 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-app_flask = Flask(name)
+app_flask = Flask(__name__)
 @app_flask.route('/')
 def home(): return "SONY Alive"
 def run_flask():
