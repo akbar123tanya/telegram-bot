@@ -54,7 +54,7 @@ async def handle_all(update, context):
   await update.message.reply_text(f"بەڵێ {name} گیان گوێم لێتە 👂")
 
 # Flask بۆ Render
-app=Flask(name)
+app=Flask(__name__)
 @app.route('/')
 def home(): return "SONY Alive"
 threading.Thread(target=lambda: app.run(host='0.0.0.0',port=int(os.environ.get("PORT",10000))),daemon=True).start()
