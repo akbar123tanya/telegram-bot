@@ -120,10 +120,16 @@ async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # 8- وەڵامی کۆتایی کە بانگی دەکەن
     await update.message.reply_text(f"گیان ئەمرکە {name} گیان 👂❤️")
 
-if __name__ == "__main__":
+if name == "main":
     threading.Thread(target=run_web, daemon=True).start()
-    app = Application.builder().token(BOT_TOKEN).build()
-    app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
     print("SONY Started")
-    app.run_polling()
+    application = Application.builder().token(BOT_TOKEN).build()
+    application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
+    application.run_polling()
+    
+    
+    
+    
+    
+    
