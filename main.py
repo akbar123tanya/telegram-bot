@@ -154,16 +154,29 @@ async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # 8- وەڵامی کۆتایی کە بانگی دەکەن
     await update.message.reply_text(f"گیان ئەمرکە {name} گیان 👂❤️")
+async def welcome(update, context):
+    for member in update.message.new_chat_members:
+        try:
+            await update.message.reply_text(f"بەخێربێی {member.first_name} گیان ❤️")
+        except:
+            pass
 
+if name == "main":
 if __name__ == "__main__":
     threading.Thread(target=run_web, daemon=True).start()
     print("SONY Started")
     application = Application.builder().token(BOT_TOKEN).build()
+    
+application = Application.builder().token(BOT_TOKEN).build()
+    
     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, filter_bad), group=0)
-application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1)
-application.run_polling(drop_pending_updates=True)
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all), group=0)
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1)
+
+    application.run_polling(drop_pending_updates=True)
+    
+
+
    
 
     
