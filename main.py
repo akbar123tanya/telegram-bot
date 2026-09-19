@@ -140,9 +140,11 @@ if __name__ == "__main__":
     application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
-    application.run_polling()
-   application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, filter_bad), group=0)
-application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1) 
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, filter_bad), group=0)
+application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1)
+application.run_polling(drop_pending_updates=True)
+   
+
     
     
     
