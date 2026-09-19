@@ -67,31 +67,52 @@ def get_answer(text):
     if "خۆشم ئەوێی" in text or "خوشمەوێی" in text: return "منیش تۆم خۆشدەوێ گیان 😍"
     if "سڵاو" in text or "سلام" in text: return "سڵاو گیان ❤️"
     return None
-
-async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    try:
-        for m in update.message.new_chat_members:
-            if m.id != context.bot.id:
-                await update.message.reply_text(f"بەخێربێی {m.first_name} گیان 👋")
-    except: pass
-
 async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not update.message or not update.message.text: return
-    if update.effective_user.is_bot: return
+    if not update.message or not update.message.text:
+        return
+    if update.effective_user.is_bot:
+        return
 
     text = update.message.text
-    text_low = text.lower()
+    text_low = text.lower().replace(" ", "").replace("‌", "")
     name = update.effective_user.first_name
     user_id = update.effective_user.id
 
-    # 1- مەرجی سڕینەوەی قسەی ناشرین (هەمیشە ئیش دەکات، تەنانەت بێ تاگ)
     for w in BAD_WORDS:
-        if w in text_low:
+        clean_w = w.lower().replace(" ", "").replace("‌", "")
+        if clean_w in text_low and clean_w != "":
             try:
-                await update.message.delete()
-                await context.bot.send_message(update.effective_chat.id, f"{name} گیان قسەی ناشرین مەکە با نەیسڕمەوە 😐")
-            except: pass
+                await context.bot.delete_message(
+                    chat_id=update.effective_chat.id,
+                    message_id=update.message.message_id
+                )
+            except Exception as e:
+                print(f"Delete error: {e}")
+            try:
+                await update.effective_chat.send_message(f"{name} گیان قسەی ناشرین مەکە 🙂")
+            except:
+                pass
             return
+
+    
+    
+            
+    
+
+
+
+    
+    
+
+    
+    
+    
+        
+            
+                
+            
+            
+            
 
     # 2- تەنها ئەگەر تاگ کرا یان ناوی هێنرا یان ڕیپلەی کرا
     is_reply_to_bot = False
