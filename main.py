@@ -191,7 +191,7 @@ async def welcome(update, context):
         except:
             pass
 
-if name == "main":
+if __name__ == "__main__":
 if __name__ == "__main__":
     threading.Thread(target=run_web, daemon=True).start()
     print("SONY Started")
