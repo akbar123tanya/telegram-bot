@@ -1,7 +1,7 @@
 import os
 import threading
 from flask import Flask
-
+BAD_WORDS = ["دایکت","خوشکت","بگێم","گۆبخۆ","گان دەر","سوک","ڕسوا","حەیوان","گەواد","کێر","مژ","جاش","خۆفرۆش","کۆیلە"]
 app = Flask(__name__)
 
 @app.route('/')
@@ -23,7 +23,21 @@ from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+async def filter_bad(update, context):
+    if update.message and update.message.text:
+        txt = update.message.text.lower()
+        for w in BAD_WORDS:
+            if w in txt:
+                try:
+                    await update.message.delete()
+                except:
+                    pass
+                return
 
+async def hazt_lachya(update, context):
+    txt = update.message.text if update.message else ""
+    if "حەزت لەچیە" in txt or "حەزت لە چیە" in txt:
+        await update.message.reply_text("هێلکە و ساردی دیو 😂")
 
 
 
@@ -127,7 +141,8 @@ if __name__ == "__main__":
     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all))
     application.run_polling()
-    
+   application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, filter_bad), group=0)
+application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1) 
     
     
     
