@@ -192,18 +192,25 @@ async def welcome(update, context):
             pass
 
 if __name__ == "__main__":
-if __name__ == "__main__":
-    threading.Thread(target=run_web, daemon=True).start()
-    print("SONY Started")
-    application = Application.builder().token(BOT_TOKEN).build()
-    
-application = Application.builder().token(BOT_TOKEN).build()
-    
-    application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all), group=0)
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1)
+     threading.Thread(target=run_web, daemon=True).start()
+     print("SONY Started")
+     application = Application.builder().token(BOT_TOKEN).build()
+     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
+     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_all), group=0)
+     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hazt_lachya), group=1)
+     application.run_polling(drop_pending_updates=True)
 
-    application.run_polling(drop_pending_updates=True)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
     
 
 
