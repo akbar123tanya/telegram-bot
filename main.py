@@ -76,6 +76,36 @@ async def handle_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     text_low = text.lower().replace(" ", "").replace("‌", "")
     name = update.effective_user.first_name
+
+    # قسەی ناشرین بسڕەوە
+    for w in BAD_WORDS:
+        clean_w = w.lower().replace(" ", "").replace("‌", "")
+        if clean_w in text_low and clean_w != "":
+            try:
+                await context.bot.delete_message(chat_id=update.effective_chat.id, message_id=update.message.message_id)
+            except:
+                pass
+            try:
+                await update.effective_chat.send_message(f"{name} گیان قسەی ناشرین مەکە 🙂")
+            except:
+                pass
+            return
+
+    # وەڵامی ئاسایی
+    ans = get_answer(text)
+    if ans:
+        try:
+            await update.message.reply_text(ans)
+        except:
+            pass
+
+        
+    
+    
+
+    text = update.message.text
+    text_low = text.lower().replace(" ", "").replace("‌", "")
+    name = update.effective_user.first_name
     user_id = update.effective_user.id
 
     for w in BAD_WORDS:
